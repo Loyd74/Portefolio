@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Milhane Moualfi - BTS SIO SLAM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav id="navbar">
+        <ul>
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#about">À propos</a></li>
+            <li><a href="#competences">Compétences</a></li>
+            <li><a href="#cv">CV</a></li>
+            <li><a href="#projets">Projets</a></li>
+            <li><a href="#veille">Veille</a></li> 
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="accueil">
+        <canvas id="particlesCanvas"></canvas>
+        <div class="hero-content">
+            <h1>Milhane Moualfi</h1>
+            <p class="subtitle">Étudiant BTS SIO SLAM (2ème année)</p>
+            <p class="description">Développeur Web & Java • Campus Charles de Foucauld</p>
+            <div class="hero-cta">
+                <a href="#projets" class="btn btn-primary">Voir mes projets</a>
+                <button onclick="openPdf('doc/cv.pdf')" class="btn btn-secondary">📄 Voir mon CV </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section fade-in" id="about">
+        <h2 class="section-title">À Propos de Moi</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>J'ai découvert l'univers du code à 17 ans, lors de mon <strong>Bac STMG option SIG</strong> (Systèmes d'Information de Gestion) au lycée Charles de Foucauld. Cette première initiation à la logique algorithmique m'a convaincu de faire de l'informatique mon métier.</p>
+                <p>J'ai naturellement poursuivi mes études au sein du <strong>Campus Charles de Foucauld</strong> en BTS SIO.</p>
+                <p>Durant ma première année, j'ai acquis des bases solides en algorithmique (C, Python) et en gestion de données (SQL). Aujourd'hui, en deuxième année, je me spécialise dans le développement applicatif avancé, avec un fort intérêt pour l'écosystème <strong>Java</strong> et le framework <strong>Laravel</strong> (PHP).</p>
+            </div>
+            <div class="skills-container">
+                <div class="skill-item">
+                    <div class="skill-name">💻 Back-End & Web</div>
+                    <div><strong>PHP (Laravel)</strong>, HTML5/CSS3</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">☕ Développement Objet</div>
+                    <div><strong>Java</strong>, Algorithmique (C / Python)</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">🗄️ Bases de Données</div>
+                    <div><strong>SQL</strong> (MySQL), Modélisation MCD/Merise</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">🛠️ Outils & Environnement</div>
+                    <div>Git, Visual Studio Code, Linux, Windows</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section fade-in" id="competences">
+        <h2 class="section-title">Tableau de Synthèse (E5)</h2>
+        <div style="text-align: center;">
+            <p style="color: #cbd5e1; margin-bottom: 2rem;">
+                Vous pouvez consulter l'intégralité de mon tableau de synthèse des compétences validées ci-dessous.
+            </p>
+            <button onclick="openPdf('doc/tableau.pdf')" class="btn btn-pdf">📄 Voir le Tableau Officiel </button>
+        </div>
+    </section>
+
+    <section class="section fade-in" id="cv">
+        <h2 class="section-title">Mon Curriculum Vitae</h2>
+        <div class="cv-container">
+            <div class="cv-grid">
+                
+                <div class="cv-sidebar">
+                    <div class="contact-info">
+                        <h3 style="color: white; margin-bottom: 1rem;">📧 Contact</h3>
+                        <p><strong>Tel:</strong> 06 15 02 13 52</p>
+                        <p><strong>Email:</strong> moualfi.milhane@gmail.com</p>
+                        <p><strong>Adresse:</strong> 21 rue Eugène Berthoud, 93400 Saint-Ouen sur Seine</p>
+                        <p><strong>Né le:</strong> 05/04/2006</p>
+                    </div>
+
+                    <div class="cv-section">
+                        <h3>🌍 Langues</h3>
+                        <p>• Anglais (niveau intermédiaire)</p>
+                        <p>• Espagnol (scolaire)</p>
+                    </div>
+
+                    <div class="cv-section">
+                        <h3>🎮 Centres d'intérêt</h3>
+                        <p>• Jeux vidéo</p>
+                        <p>• Handball en club (6 ans, niveau régional)</p>
+                    </div>
+                    
+                    <button onclick="openPdf('doc/cv.pdf')" class="btn btn-pdf" style="width: 100%;">📄 Prévisualiser CV</button>
+
+                </div>
+
+                <div class="cv-main">
+                    <div class="cv-section">
+                        <h3>🎯 Profil</h3>
+                        <p>
+                            Étudiant en deuxième année de BTS SIO en recherche d'un stage informatique en développement web. 
+                            Passionné par le développement, je souhaite mettre en œuvre mes compétences acquises en formation et en stage.
+                        </p>
+                    </div>
+
+                    <div class="cv-section">
+                        <h3>🎓 Formation</h3>
+                        <div class="cv-item">
+                            <h4>BTS SIO option SLAM</h4>
+                            <p class="date">2024 - 2026</p>
+                            <p>Solutions Logicielles et Applications Métiers</p>
+                            <p><strong>Campus Charles de Foucauld</strong></p>
+                        </div>
+                        <div class="cv-item">
+                            <h4>Baccalauréat STMG option SIG</h4>
+                            <p class="date">2023 - 2024</p>
+                            <p>Systèmes d'Information et de Gestion</p>
+                            <p><strong>Lycée Charles de Foucauld</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="cv-section">
+                        <h3>💼 Expérience Professionnelle</h3>
+                        <div class="cv-item">
+                            <h4>Stage de Développement Web - CNAV</h4>
+                            <p class="date">Stage de 5 semaines</p>
+                            <p><strong>Missions principales :</strong></p>
+                            <ul style="margin-left: 1.5rem; color: #cbd5e1; line-height: 1.8;">
+                                <li>Création de pages web et de formulaires</li>
+                                <li>Gestion et mise à jour de bases de données</li>
+                                <li>Utilisation des langages : C# (Csharp), HTML, CSS</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section fade-in" id="projets">
+        <h2 class="section-title">Mes Projets</h2>
+        <div class="projects-grid">
+            
+            <div class="project-card">
+                <h3>Application Web - CNAV : Gestion CINEMA</h3>
+                <p class="project-context">🏢 Stage 1ère année • 5 semaines</p>
+                <p>Développement des fonctionnalités d'administration pour les entités `Genre` et `Film` d'une application interne de la CNAV, en utilisant le framework **C# ASP.NET MVC** et les migrations de base de données.</p>
+                
+                <div class="tags" style="margin-top: 1rem;">
+                    <span class="tag">C# (Csharp)</span>
+                    <span class="tag">ASP.NET MVC</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">CRUD</span>
+                </div>
+                
+                <a href="cnav_doc.html" class="project-link" style="margin-top: 20px;">Voir la Documentation Technique &rarr;</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Gestion de Parc Laravel</h3>
+                <p class="project-context">📍 Projet Laravel • 2ème Année</p>
+                <p>Développement d'une application web dynamique avec le framework Laravel. Gestion des routes, contrôleurs et ORM Eloquent.</p>
+                <div class="tags">
+                    <span class="tag">PHP 8</span>
+                    <span class="tag">Laravel</span>
+                    <span class="tag">MySQL</span>
+                    <span class="tag">MVC</span>
+                </div>
+                <a href="#" class="project-link">Voir la documentation PDF →</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Application Desktop Java</h3>
+                <p class="project-context">📍 Atelier Professionnel • Java</p>
+                <p>Conception d'une application desktop en Java avec connexion JDBC à une base de données. Architecture POO.</p>
+                <div class="tags">
+                    <span class="tag">Java</span>
+                    <span class="tag">JDBC</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">POO</span>
+                </div>
+                <a href="https://github.com/Loyd74" class="project-link">Voir sur GitHub →</a>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section fade-in" id="veille">
+        <h2 class="section-title">Veille Technologique</h2>
+        <div class="veille-container" style="text-align: center;">
+            <h3>Sujet : L'innovation technique de la Réalité Augmentée (AR)</h3>
+            <p style="color: #cbd5e1; margin: 1.5rem 0;">
+                Je surveille les évolutions techniques (Unity, ARKit, Niantic) qui transforment le jeu vidéo et l'interaction avec le réel.
+                Découvrez ma méthodologie et ma synthèse complète sur la page dédiée.
+            </p>
+            <a href="veille.html" class="btn btn-primary">🔎 Accéder à ma Veille Technologique</a>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h2>Me Contacter</h2>
+        <div class="contact-links">
+            <a href="mailto:moualfi.milhane@gmail.com">📧 moualfi.milhane@gmail.com</a>
+            <a href="https://www.linkedin.com/in/milhane-undefined-9a610739a/" target="_blank">💼 LinkedIn</a>
+            <a href="https://github.com/Loyd74" target="_blank">💻 GitHub</a>
+        </div>
+        <p style="opacity: 0.6; margin-top: 2rem;">© 2025 - Milhane Moualfi - BTS SIO Charles de Foucauld</p>
+    </footer>
+
+    <div id="pdfModal" class="modal" onclick="closePdf(event)">
+        <div class="close-modal" onclick="closePdf(event)">×</div>
+        <div class="modal-content">
+            <iframe id="pdfFrame" src="" allow="fullscreen"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // ============ PDF MODAL LOGIC ============
+        function openPdf(filename) {
+            const modal = document.getElementById('pdfModal');
+            const iframe = document.getElementById('pdfFrame');
+            iframe.src = filename;
+            modal.style.display = 'flex';
+        }
+
+        function closePdf(event) {
+            if (event.target.id === 'pdfModal' || event.target.classList.contains('close-modal')) {
+                const modal = document.getElementById('pdfModal');
+                const iframe = document.getElementById('pdfFrame');
+                modal.style.display = 'none';
+                iframe.src = ''; 
+            }
+        }
+
+        // ============ CANVAS PARTICLES et SCROLL LOGIC (Inchangé) ============
+        const canvas = document.getElementById('particlesCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let particlesArray = [];
+        const numberOfParticles = 80;
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        function init() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+        function connect() {
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    const dx = particlesArray[a].x - particlesArray[b].x;
+                    const dy = particlesArray[a].y - particlesArray[b].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 120) {
+                        const opacity = 0.2 * (1 - distance / 120);
+                        ctx.strokeStyle = `rgba(129, 140, 248, ${opacity})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            connect();
+            requestAnimationFrame(animate);
+        }
+        init();
+        animate();
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

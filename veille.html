@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veille Technologique - Milhane Moualfi</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .veille-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #312e81 50%, #1e1b4b 100%);
+            padding: 8rem 5% 4rem 5%;
+            text-align: center;
+        }
+        .veille-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        .veille-header p {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .veille-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+        }
+        .veille-section {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border-left: 5px solid var(--primary);
+        }
+        .veille-section h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 1rem;
+        }
+        .veille-section h3 {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+        }
+        .veille-section p, .veille-section li {
+            color: #cbd5e1;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        .veille-section ul {
+            margin-left: 2rem;
+        }
+        .veille-section li {
+            margin-bottom: 0.8rem;
+        }
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .tool-card {
+            background: rgba(129, 140, 248, 0.1);
+            border: 1px solid rgba(129, 140, 248, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            background: rgba(129, 140, 248, 0.2);
+        }
+        .tool-card h4 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .article-card {
+            background: rgba(129, 140, 248, 0.05);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .article-card h4 {
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        .article-meta {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        .article-meta a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .article-meta a:hover {
+            text-decoration: underline;
+        }
+        .highlight-box {
+            background: rgba(244, 114, 182, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+        }
+        .highlight-box strong {
+            color: var(--accent);
+        }
+        .back-button {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .back-button:hover {
+            transform: translateX(-5px);
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <ul>
+            <li><a href="index.html">← Retour au Portfolio</a></li>
+            <li><a href="#methodologie">Méthodologie</a></li>
+            <li><a href="#outils">Outils</a></li>
+            <li><a href="#articles">Articles</a></li>
+            <li><a href="#synthese">Synthèse</a></li>
+        </ul>
+    </nav>
+
+    <div class="veille-header">
+        <h1>🎮 Veille Technologique</h1>
+        <p>La Réalité Augmentée dans les Jeux Vidéo</p>
+        <p style="margin-top: 1rem; font-size: 1rem;">Milhane Moualfi - BTS SIO SLAM 2ème année</p>
+    </div>
+
+    <div class="veille-content">
+        <a href="index.html" class="back-button">← Retour au portfolio</a>
+
+        <div class="veille-section" id="methodologie">
+            <h2>Méthodologie & Définitions</h2>
+            
+            <h3>Veille Technologique vs Veille Informationnelle</h3>
+            <p>Il est important de distinguer ces deux concepts clés :</p>
+            
+            <ul>
+                <li><strong>Veille Informationnelle :</strong> C'est une surveillance globale de l'actualité d'un secteur (tendances du marché gaming, nouveaux studios, annonces commerciales). <em>Exemple : Suivre les ventes du PlayStation VR2 ou l'actualité d'Epic Games.</em></li>
+                <li><strong>Veille Technologique :</strong> C'est une surveillance plus ciblée sur les évolutions techniques (nouveaux capteurs AR, frameworks de développement, innovations hardware) pour anticiper les changements technologiques. <em>Exemple : Suivre les mises à jour d'ARKit d'Apple, les nouveaux SDK de Unity pour l'AR, ou les brevets de Meta sur le tracking oculaire.</em></li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>Mon choix :</strong> Je réalise ici une <strong>veille technologique</strong> axée sur les innovations techniques de la Réalité Augmentée appliquée aux jeux vidéo.</p>
+            </div>
+
+            <h3>Méthodes de collecte : Push & Pull</h3>
+            
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <h4>🔔 Méthode PUSH (L'info vient à moi)</h4>
+                    <p>L'information est poussée automatiquement vers moi grâce à des outils configurés.</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                        <li>🔔 Google Alerts (mots-clés : "AR gaming", "réalité augmentée jeux")</li>
+                        <li>📧 Newsletters (UploadVR, Road to VR)</li>
+                        <li>📱 Notifications YouTube (chaînes tech VR/AR)</li>
+                    </ul>
+                </div>
+
+                <div class="tool-card">
+                    <h4>🔍 Méthode PULL (Je vais chercher l'info)</h4>
+                    <p>Je me rends activement sur les sites et communautés pour trouver l'information.</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                        <li>🔍 Recherche manuelle sur Reddit (r/gaming, r/augmentedreality)</li>
+                        <li>💬 Forums spécialisés (Unity Forums, Unreal Engine)</li>
+                        <li>📰 Blogs tech (JeuxVideo.com, Gamekult, The Verge)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 2rem;">
+                <p><strong>Ma stratégie :</strong> J'utilise une <strong>combinaison hybride</strong> pour ne rien rater des annonces majeures (Push) tout en approfondissant les aspects techniques (Pull).</p>
+                <p style="margin-top: 0.5rem;"><strong>Flux RSS :</strong> Fichier dynamique produit automatiquement en fonction des mises à jour d'un site web. Très utile pour suivre les blogs de développeurs AR.</p>
+            </div>
+        </div>
+
+        <div class="veille-section" id="outils">
+            <h2>Outils et sources de veille</h2>
+
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <h4>🔔 Google Alerts</h4>
+                    <p><strong>Mes alertes :</strong></p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Réalité augmentée jeux vidéo</li>
+                        <li>ARKit nouveautés gaming</li>
+                        <li>Meta Quest 3 développement AR</li>
+                        <li>Apple Vision Pro jeux</li>
+                    </ul>
+                </div>
+
+                <div class="tool-card">
+                    <h4>🌐 Réseaux Sociaux & Communautés</h4>
+                    <p><strong>- Twitter/X</strong></p>
+                    <p>Comptes suivis : @unity3d, @UnrealEngine, @oculus</p>
+                    <p style="margin-top: 1rem;"><strong>- Reddit</strong></p>
+                    <p>Subreddits : r/augmentedreality, r/virtualreality, r/gamedev</p>
+                    <p style="margin-top: 1rem;"><strong>- YouTube</strong></p>
+                    <p>Chaînes : Thrillseeker, MRTV, Gamertag VR</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="veille-section" id="articles">
+            <h2>Articles et ressources suivis</h2>
+
+            <div class="article-card">
+                <h4>Pokémon GO et l'évolution de l'AR mobile gaming (2016-2025)</h4>
+                <p class="article-meta">
+                    📅 Date : Novembre 2024 | 🔗 Source : The Verge, Numerama
+                </p>
+
+                <p><strong>Résumé :</strong> Pokémon GO reste le cas d'école de l'AR gaming mobile. Lancé en 2016, il a démontré le potentiel commercial de la réalité augmentée grand public avec plus de 1 milliard de téléchargements. Depuis, Niantic a continuellement amélioré sa technologie de tracking spatial et de cartographie 3D du monde réel (Niantic Lightship), permettant des expériences AR plus immersives.</p>
+
+                <p style="margin-top: 1rem;"><strong>Innovations techniques clés :</strong></p>
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>AR Mapping :</strong> Utilisation des données des joueurs pour créer une carte 3D mondiale persistante</li>
+                    <li><strong>Occlusion :</strong> Les Pokémon peuvent désormais se cacher derrière des objets réels</li>
+                    <li><strong>Multiplayer AR :</strong> Plusieurs joueurs voient le même Pokémon au même endroit en temps réel</li>
+                </ul>
+
+                <p style="margin-top: 1rem;"><strong>Impact sur mon projet professionnel :</strong> Ce cas montre que l'AR gaming ne se limite pas aux casques coûteux. En tant que futur développeur, je dois maîtriser les SDK mobiles (ARCore pour Android, ARKit pour iOS) qui sont déjà très puissants et accessibles au grand public.</p>
+            </div>
+
+            <div class="article-card">
+                <h4>Apple Vision Pro : Un tournant pour le développement AR/VR ?</h4>
+                <p class="article-meta">
+                    📅 Date : Juin 2024 - Février 2025 | 🔗 Source : Apple Developer, 9to5Mac
+                </p>
+
+                <p><strong>Contexte :</strong> Lancé en février 2024 aux USA puis début 2025 en Europe, l'Apple Vision Pro représente l'entrée d'Apple dans le spatial computing avec un positionnement premium (3999€).</p>
+
+                <p><strong>Innovations techniques majeures :</strong></p>
+                <ul>
+                    <li><strong>VisionOS :</strong> Premier OS spatial natif d'Apple avec SwiftUI 3D</li>
+                    <li><strong>Eye tracking ultra-précis :</strong> Navigation par le regard + gestes des mains (pas de contrôleurs)</li>
+                    <li><strong>Passthrough haute résolution :</strong> Fusion naturelle entre réel et virtuel</li>
+                    <li><strong>Spatial Audio :</strong> Son 3D adaptatif basé sur l'environnement réel</li>
+                </ul>
+
+                <p><strong>Pour les développeurs de jeux :</strong></p>
+                <ul>
+                    <li>Unity et Unreal Engine supportent nativement VisionOS</li>
+                    <li>Nouveaux paradigmes de gameplay : interaction par le regard, placement d'objets virtuels dans l'espace réel</li>
+                    <li>Défi : développer des jeux qui utilisent l'espace physique du joueur (salon, chambre)</li>
+                </ul>
+
+                <p><strong>Impact sur mon projet :</strong> Même si le Vision Pro est hors de portée financièrement, comprendre ces technologies me prépare à l'avenir du gaming. Apple impose souvent des standards (comme l'iPhone l'a fait pour le mobile). Je dois apprendre SwiftUI et les principes du spatial computing.</p>
+            </div>
+
+            <div class="article-card">
+                <h4>Meta Quest 3 et l'AR mixte accessible (Mixed Reality)</h4>
+                <p class="article-meta">
+                    📅 Date : Octobre 2023 - 2025 | 🔗 Source : Upload VR, Meta Developer Blog
+                </p>
+
+                <p><strong>Contexte :</strong> Avec le Quest 3 (599€), Meta démocratise la Mixed Reality (MR) - fusion de la VR et de l'AR. Contrairement au Vision Pro élitiste, le Quest 3 cible le grand public et les développeurs indépendants.</p>
+
+                <p><strong>Innovations techniques :</strong></p>
+                <ul>
+                    <li><strong>Passthrough couleur haute résolution :</strong> Permet de voir le monde réel en couleur nette</li>
+                    <li><strong>Depth API :</strong> Les jeux peuvent comprendre la géométrie de votre pièce (murs, meubles, sol)</li>
+                    <li><strong>Scene Understanding :</strong> IA qui identifie automatiquement les surfaces planes (table, mur) pour y placer des objets virtuels</li>
+                </ul>
+
+                <p><strong>Jeux AR innovants sur Quest 3 :</strong></p>
+                <ul>
+                    <li><strong>BAM (Battle Action Mech) :</strong> Des robots géants combattent dans votre salon, détruisant vos murs virtuellement</li>
+                    <li><strong>Spatial Ops :</strong> FPS où les ennemis surgissent de vos vrais murs</li>
+                    <li><strong>Demeo :</strong> Jeu de plateau virtuel posé sur votre vraie table</li>
+                </ul>
+
+                <p><strong>Impact sur mon projet :</strong> Le Quest 3 est la plateforme idéale pour débuter en développement AR. Le SDK Meta XR est gratuit, bien documenté, et fonctionne avec Unity. C'est aussi la plateforme avec le plus gros marché actuel (Meta Quest Store). Si je veux faire un portfolio de développeur AR/VR, je dois cibler cette plateforme.</p>
+            </div>
+
+            <div class="article-card">
+                <h4>Les défis techniques actuels de l'AR Gaming</h4>
+                <p class="article-meta">
+                    📅 Date : Décembre 2024 | 🔗 Source : GDC Talks (Game Developers Conference)
+                </p>
+
+                <p><strong>Résumé :</strong> Malgré les progrès, plusieurs barrières techniques freinent encore l'adoption massive de l'AR dans les jeux :</p>
+
+                <ul>
+                    <li><strong>Autonomie limitée :</strong> Les casques AR/VR tiennent 2-3h max (calculs 3D + écrans haute résolution = énergivores)</li>
+                    <li><strong>Champ de vision restreint :</strong> La plupart des casques AR ont un FOV de 100-110° (vs 210° de vision humaine)</li>
+                    <li><strong>Motion sickness :</strong> La latence entre mouvement réel et affichage cause des nausées si > 20ms</li>
+                    <li><strong>Tracking imparfait :</strong> Perte de tracking si environnement trop sombre ou surfaces réfléchissantes</li>
+                    <li><strong>Coût de développement :</strong> Développer pour AR nécessite des compétences en tracking spatial, shaders, optimisation 3D temps réel</li>
+                </ul>
+
+                <p><strong>Impact sur mon projet professionnel :</strong> Ces limitations montrent que le métier de développeur AR/VR exige des compétences techniques avancées : optimisation (pour l'autonomie), algorithmes de tracking, gestion de la latence, UX spatiale. C'est un domaine de niche mais à forte valeur ajoutée.</p>
+            </div>
+        </div>
+
+        <div class="veille-section" id="synthese">
+            <h2>Synthèse personnelle</h2>
+
+            <p>Ma veille technologique sur la réalité augmentée dans les jeux vidéo m'a permis de comprendre un marché en pleine mutation et d'identifier des opportunités professionnelles concrètes pour 2026.</p>
+
+            <h3>État des lieux de l'AR Gaming en 2025</h3>
+
+            <p><strong>Le marché se divise en 3 segments distincts :</strong></p>
+            <ul>
+                <li><strong>AR Mobile (Smartphones) :</strong> Marché mature avec des succès comme Pokémon GO. Accessible mais limité techniquement.</li>
+                <li><strong>Mixed Reality grand public (Quest 3, PlayStation VR2) :</strong> En croissance rapide, prix abordable (500-600€), bon compromis qualité/prix.</li>
+                <li><strong>Spatial Computing premium (Vision Pro) :</strong> Technologie de pointe mais marché de niche (prix > 3500€).</li>
+            </ul>
+
+            <h3>Opportunités identifiées pour un développeur</h3>
+
+            <ul>
+                <li><strong>Forte demande, peu d'experts :</strong> Le développement AR/VR reste une niche technique. Les studios cherchent activement des développeurs maîtrisant Unity/Unreal + XR SDK.</li>
+                <li><strong>Salaires attractifs :</strong> Un développeur AR/VR junior commence à 35-40K€ (vs 28-32K€ pour du web classique) car compétences rares.</li>
+                <li><strong>Portfolio différenciant :</strong> Créer un jeu AR, même simple, sur Quest ou mobile me démarquera des autres candidats BTS SIO qui font principalement du web/application classique.</li>
+                <li><strong>Convergence avec le développement web :</strong> WebXR permet de faire de l'AR directement dans le navigateur (Three.js + WebXR API). Pont entre mes compétences web actuelles et l'AR.</li>
+            </ul>
+
+            <h3>Technologies à maîtriser (Plan d'action)</h3>
+
+            <ul>
+                <li><strong>Court terme (6 mois) :</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Apprendre Unity + C# (moteur le plus utilisé en AR/VR)</li>
+                        <li>Tester le développement AR mobile avec ARCore (Android) via Unity</li>
+                        <li>Créer un petit jeu AR mobile pour mon portfolio (ex: placement d'objets 3D dans l'espace réel)</li>
+                    </ul>
+                </li>
+                <li><strong>Moyen terme (1 an) :</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Si possible, acquérir un Meta Quest 2 d'occasion (200-250€) pour tester le développement MR</li>
+                        <li>Étudier le Meta XR SDK et créer une démo interactive</li>
+                        <li>Participer à des game jams AR/VR pour apprendre et networker</li>
+                    </ul>
+                </li>
+                <li><strong>Compétences connexes :</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Modélisation 3D basique (Blender) pour créer mes propres assets</li>
+                        <li>Optimisation 3D temps réel (LOD, occlusion culling) crucial pour l'AR mobile</li>
+                        <li>UX spatiale : comprendre comment les utilisateurs interagissent dans un espace 3D</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Réalisme du projet</h3>
+
+            <div class="highlight-box">
+                <p><strong>Points positifs :</strong></p>
+                <ul style="margin-top: 0.5rem;">
+                    <li>✅ Marché en croissance (prévu +30% par an jusqu'en 2028)</li>
+                    <li>✅ Compétences C# transférables (je connais déjà Java et PHP)</li>
+                    <li>✅ Ressources gratuites abondantes (Unity Learn, YouTube, documentation Meta)</li>
+                    <li>✅ Pas besoin de matériel coûteux pour débuter (AR mobile = juste un smartphone)</li>
+                </ul>
+
+                <p style="margin-top: 1rem;"><strong>Défis à relever :</strong></p>
+                <ul style="margin-top: 0.5rem;">
+                    <li>⚠️ Courbe d'apprentissage : Unity + 3D + tracking spatial = beaucoup de concepts nouveaux</li>
+                    <li>⚠️ Investissement temps : 6-12 mois pour devenir opérationnel</li>
+                    <li>⚠️ Marché encore petit en France (la plupart des studios AR/VR sont aux USA/UK)</li>
+                </ul>
+            </div>
+
+            <h3>Conclusion</h3>
+
+            <div class="highlight-box">
+                <p>L'AR Gaming n'est plus de la science-fiction. Avec des dispositifs comme le Quest 3 à 600€ et des millions de smartphones compatibles ARCore/ARKit, la technologie est là. Ce qui manque, ce sont des développeurs compétents pour créer des expériences innovantes.</p>
+                <p style="margin-top: 1rem;">Mon objectif pour 2025-2026 est de me positionner sur cette niche en développant des compétences Unity et XR qui complètent ma formation BTS SIO. Plutôt que de devenir un développeur web/Java parmi tant d'autres, je veux être un développeur capable de créer des expériences immersives en AR – un profil rare et recherché.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer id="contact">
+        <h2>Me Contacter</h2>
+        <div class="contact-links">
+            <a href="mailto:moualfi.milhane@gmail.com">📧 moualfi.milhane@gmail.com</a>
+            <a href="https://www.linkedin.com/in/milhane-undefined-9a610739a/" target="_blank">💼 LinkedIn</a>
+            <a href="https://github.com/Loyd74" target="_blank">💻 GitHub</a>
+        </div>
+        <p style="opacity: 0.6; margin-top: 2rem;">© 2025 - Milhane Moualfi - BTS SIO Charles de Foucauld</p>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
