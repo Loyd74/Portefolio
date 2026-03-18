@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Java - Gestion Personnel des Ligues - Milhane Moualfi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav id="navbar">
+        <ul>
+            <li><a href="index.html">← Retour au Portfolio</a></li>
+            <li><a href="#contexte">Contexte</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#classes">Classes</a></li>
+            <li><a href="#jdbc">JDBC</a></li>
+            <li><a href="#tests">Tests</a></li>
+        </ul>
+    </nav>
+
+    <div class="doc-header">
+        <h1>Application Desktop Java</h1>
+        <p>Gestion du personnel des ligues sportives — Architecture POO, JDBC, Patron Passerelle.</p>
+        <div class="tag-list">
+            <span class="tech-tag">Java 1.8</span>
+            <span class="tech-tag">JDBC / MySQL</span>
+            <span class="tech-tag">Maven</span>
+            <span class="tech-tag">JUnit 5</span>
+            <span class="tech-tag">POO</span>
+        </div>
+    </div>
+
+    <div class="doc-content">
+        <a href="index.html" class="back-button">← Retour au portfolio</a>
+
+        <!-- CONTEXTE -->
+        <div class="doc-section" id="contexte">
+            <h2>Contexte du projet</h2>
+            <p>
+                Projet d'atelier professionnel réalisé en 2ème année de BTS SIO SLAM. L'objectif était de concevoir une
+                <strong>application desktop en Java</strong> permettant à la M2L (Maison des Ligues) de gérer les ligues sportives
+                qu'elle héberge ainsi que leurs employés, via une interface entièrement en ligne de commande.
+                Les données sont persistées dans une base <strong>MySQL via JDBC</strong>.
+            </p>
+            <h3>Fonctionnalités principales</h3>
+            <ul style="margin-left: 1.5rem;">
+                <li>Création, renommage et suppression de ligues</li>
+                <li>Ajout, modification (nom, prénom, mail, mot de passe, dates) et suppression d'employés</li>
+                <li>Gestion des rôles : root (super-utilisateur), administrateur de ligue, employé simple</li>
+                <li>Double persistance commutable : MySQL/JDBC ou sérialisation Java binaire</li>
+                <li>Validation métier des dates avec exceptions personnalisées (<code>DateInvalide</code>)</li>
+                <li>Suite de tests unitaires JUnit 5 couvrant les entités métier</li>
+            </ul>
+        </div>
+
+        <!-- ARCHITECTURE -->
+        <div class="doc-section" id="architecture">
+            <h2>Architecture du projet</h2>
+
+            <h3>Flux d'exécution</h3>
+            <div class="arch-flow">
+                <div class="arch-box">Console<span>commandLine</span></div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">Métier<span>personnel</span></div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">Passerelle<span>interface</span></div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box" style="border-color:#ffa657; background:rgba(255,166,87,0.1);">
+                    JDBC / Sérial.<span style="color:#ffa657;">persistance</span>
+                </div>
+            </div>
+
+            <h3>Organisation des packages</h3>
+            <table class="class-table">
+                <thead><tr><th>Package</th><th>Rôle</th></tr></thead>
+                <tbody>
+                    <tr><td><code>personnel</code></td><td>Couche métier : <code>Employe</code>, <code>Ligue</code>, <code>GestionPersonnel</code>, exceptions</td></tr>
+                    <tr><td><code>commandLine</code></td><td>Interface console : <code>PersonnelConsole</code>, <code>LigueConsole</code>, <code>EmployeConsole</code></td></tr>
+                    <tr><td><code>jdbc</code></td><td>Persistance MySQL : connexion, CRUD complet via <code>PreparedStatement</code></td></tr>
+                    <tr><td><code>serialisation</code></td><td>Persistance alternative : sérialisation Java binaire</td></tr>
+                    <tr><td><code>testsUnitaires</code></td><td>Tests JUnit 5 : <code>testLigue</code>, <code>testEmploye</code></td></tr>
+                </tbody>
+            </table>
+
+            <h3>Patron de conception : Passerelle (Gateway)</h3>
+            <p>L'interface <code>Passerelle</code> découple totalement la logique métier de la persistance.
+            Basculer entre MySQL et sérialisation ne nécessite qu'un seul changement de constante :</p>
+            <details>
+                <summary>💻 Voir le code — Sélection de la passerelle</summary>
+                <div class="details-content">
+                    <p class="code-title">GestionPersonnel.java</p>
+                    <div class="code-block"><pre><span class="kw">public final static int</span> SERIALIZATION = <span class="nm">1</span>, JDBC = <span class="nm">2</span>,
+        TYPE_PASSERELLE = JDBC; <span class="cm">// ← changer ici pour switcher</span>
+
+<span class="kw">private static</span> <span class="cl">Passerelle</span> passerelle =
+        TYPE_PASSERELLE == JDBC
+        ? <span class="kw">new</span> <span class="cl">jdbc.JDBC</span>()
+        : <span class="kw">new</span> <span class="cl">serialisation.Serialization</span>();</pre></div>
+                </div>
+            </details>
+
+            <h3>Modèle de données</h3>
+            <p>Deux tables reliées par une clé étrangère nullable (<code>id_ligue NULL</code> = employé root sans ligue).</p>
+            <div class="db-schema">
+                <div class="db-table-card">
+                    <div class="db-table-header">LIGUE</div>
+                    <div class="db-field"><span class="fname">id_ligue</span><span class="ftype">INT</span><span class="fkey">PK AUTO_INCREMENT</span></div>
+                    <div class="db-field"><span class="fname">nom_ligue</span><span class="ftype">VARCHAR(100)</span><span class="fkey">NOT NULL</span></div>
+                </div>
+                <div class="db-table-card">
+                    <div class="db-table-header">EMPLOYE</div>
+                    <div class="db-field"><span class="fname">id_employe</span><span class="ftype">INT</span><span class="fkey">PK AUTO_INCREMENT</span></div>
+                    <div class="db-field"><span class="fname">nom_employe</span><span class="ftype">VARCHAR(100)</span><span class="fkey"></span></div>
+                    <div class="db-field"><span class="fname">prenom_employe</span><span class="ftype">VARCHAR(100)</span><span class="fkey"></span></div>
+                    <div class="db-field"><span class="fname">mail_employe</span><span class="ftype">VARCHAR(150)</span><span class="fkey"></span></div>
+                    <div class="db-field"><span class="fname">password_employe</span><span class="ftype">VARCHAR(255)</span><span class="fkey"></span></div>
+                    <div class="db-field"><span class="fname">date_arrivee_employe</span><span class="ftype">DATE</span><span class="fkey">NULLABLE</span></div>
+                    <div class="db-field"><span class="fname">date_départ_employe</span><span class="ftype">VARCHAR</span><span class="fkey">NULLABLE</span></div>
+                    <div class="db-field"><span class="fname">id_ligue</span><span class="ftype">INT</span><span class="fkey">FK → LIGUE (nullable)</span></div>
+                    <div class="db-field"><span class="fname">rôle_employe</span><span class="ftype">VARCHAR(20)</span><span class="fkey">'admin' | 'employe'</span></div>
+                </div>
+            </div>
+            <p class="db-relation">0,n ── Appartient ── 0,1 &nbsp;|&nbsp; id_ligue NULL = root (aucune ligue)</p>
+        </div>
+
+        <!-- CLASSES -->
+        <div class="doc-section" id="classes">
+            <h2>Description des classes métier</h2>
+
+            <details open>
+                <summary>🏗️ GestionPersonnel — Singleton central</summary>
+                <div class="details-content">
+                    <p style="color:#cbd5e1; margin-bottom:1rem;">Orchestre toutes les opérations sur ligues et employés. Une seule instance possible.</p>
+                    <table class="class-table">
+                        <thead><tr><th>Méthode</th><th>Retour</th><th>Description</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>getGestionPersonnel()</code></td><td><code>GestionPersonnel</code></td><td>Retourne l'unique instance (Singleton)</td></tr>
+                            <tr><td><code>addLigue(nom)</code></td><td><code>Ligue</code></td><td>Crée et persiste une ligue</td></tr>
+                            <tr><td><code>getLigues()</code></td><td><code>SortedSet&lt;Ligue&gt;</code></td><td>Toutes les ligues en lecture seule</td></tr>
+                            <tr><td><code>getRoot()</code></td><td><code>Employe</code></td><td>Retourne le super-utilisateur root</td></tr>
+                            <tr><td><code>sauvegarder()</code></td><td><code>void</code></td><td>Délègue la sauvegarde à la passerelle</td></tr>
+                            <tr><td><code>delete(Employe)</code></td><td><code>void</code></td><td>Suppression via la passerelle active</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </details>
+
+            <details>
+                <summary>🏆 Ligue — Entité sportive</summary>
+                <div class="details-content">
+                    <p style="color:#cbd5e1; margin-bottom:1rem;">Contient un ensemble trié d'employés. Le root est administrateur par défaut jusqu'à affectation explicite.</p>
+                    <table class="class-table">
+                        <thead><tr><th>Méthode</th><th>Retour</th><th>Description</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>getNom() / setNom()</code></td><td><code>String / void</code></td><td>Lecture/écriture du nom, persisté en BDD</td></tr>
+                            <tr><td><code>getEmployes()</code></td><td><code>SortedSet&lt;Employe&gt;</code></td><td>Liste triée alphabétiquement, lecture seule</td></tr>
+                            <tr><td><code>addEmploye(...)</code></td><td><code>Employe</code></td><td>Seul moyen de créer un employé</td></tr>
+                            <tr><td><code>setAdministrateur(emp)</code></td><td><code>void</code></td><td>Change l'admin + met à jour les rôles en BDD</td></tr>
+                            <tr><td><code>setAdministrateurFromJDBC()</code></td><td><code>void</code></td><td>Affecte l'admin au chargement sans appel BDD</td></tr>
+                            <tr><td><code>remove()</code></td><td><code>void</code></td><td>Retire la ligue de GestionPersonnel</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </details>
+
+            <details>
+                <summary>👤 Employe — Membre d'une ligue</summary>
+                <div class="details-content">
+                    <p style="color:#cbd5e1; margin-bottom:1rem;">Instanciable uniquement via <code>Ligue.addEmploye()</code>. Gère la validation des dates et la protection du root.</p>
+                    <table class="class-table">
+                        <thead><tr><th>Méthode</th><th>Retour</th><th>Description</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>setDateArrivee(date)</code></td><td><code>void</code></td><td>Lève <code>DateInvalide</code> si date &gt; aujourd'hui</td></tr>
+                            <tr><td><code>setDateDepart(date)</code></td><td><code>void</code></td><td>Lève <code>DateInvalide</code> si date &lt; dateArrivée</td></tr>
+                            <tr><td><code>estAdmin(ligue)</code></td><td><code>boolean</code></td><td>Vrai si this est l'admin de la ligue donnée</td></tr>
+                            <tr><td><code>estRoot()</code></td><td><code>boolean</code></td><td>Vrai si this est le root</td></tr>
+                            <tr><td><code>checkPassword(pwd)</code></td><td><code>boolean</code></td><td>Compare le mot de passe fourni</td></tr>
+                            <tr><td><code>remove()</code></td><td><code>void</code></td><td>Suppression ; lève <code>ImpossibleDeSupprimerRoot</code> si root</td></tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-top: 1rem;">
+                        <p class="code-title">Employe.java — Validation des dates</p>
+                        <div class="code-block"><pre><span class="kw">public void</span> <span class="nm">setDateArrivee</span>(<span class="cl">LocalDate</span> dateArrivee) <span class="kw">throws</span> <span class="cl">DateInvalide</span> {
+    <span class="kw">if</span> (dateArrivee != <span class="kw">null</span> &amp;&amp; dateArrivee.isAfter(<span class="cl">LocalDate</span>.now()))
+        <span class="kw">throw new</span> <span class="cl">DateInvalide</span>(<span class="st">"La date d'arrivée ne peut pas être future."</span>);
+    <span class="kw">this</span>.dateArrivee = dateArrivee;
+}
+
+<span class="kw">public void</span> <span class="nm">setDateDepart</span>(<span class="cl">LocalDate</span> dateDepart) <span class="kw">throws</span> <span class="cl">DateInvalide</span> {
+    <span class="kw">if</span> (dateDepart != <span class="kw">null</span> &amp;&amp; dateDepart.isBefore(dateArrivee))
+        <span class="kw">throw new</span> <span class="cl">DateInvalide</span>(<span class="st">"La date de départ ne peut pas précéder l'arrivée."</span>);
+    <span class="kw">this</span>.dateDepart = dateDepart;
+}</pre></div>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>🔌 Interface Passerelle — Contrat CRUD</summary>
+                <div class="details-content">
+                    <p class="code-title">Passerelle.java</p>
+                    <div class="code-block"><pre><span class="kw">public interface</span> <span class="cl">Passerelle</span> {
+    <span class="cl">GestionPersonnel</span> <span class="nm">getGestionPersonnel</span>();
+    <span class="kw">void</span> <span class="nm">sauvegarderGestionPersonnel</span>(<span class="cl">GestionPersonnel</span> gp) <span class="kw">throws</span> <span class="cl">SauvegardeImpossible</span>;
+    <span class="kw">int</span> <span class="nm">insert</span>(<span class="cl">Ligue</span> ligue)    <span class="kw">throws</span> <span class="cl">SauvegardeImpossible</span>;
+    <span class="kw">int</span> <span class="nm">insert</span>(<span class="cl">Employe</span> employe) <span class="kw">throws</span> <span class="cl">SauvegardeImpossible</span>;
+    <span class="kw">int</span> <span class="nm">update</span>(<span class="cl">Ligue</span> ligue)    <span class="kw">throws</span> <span class="cl">SauvegardeImpossible</span>;
+    <span class="kw">int</span> <span class="nm">update</span>(<span class="cl">Employe</span> employe) <span class="kw">throws</span> <span class="cl">SauvegardeImpossible</span>;
+    <span class="kw">int</span> <span class="nm">delete</span>(<span class="cl">Employe</span> employe) <span class="kw">throws</span> <span class="cl">SauvegardeImpossible</span>;
+}</pre></div>
+                </div>
+            </details>
+        </div>
+
+        <!-- JDBC -->
+        <div class="doc-section" id="jdbc">
+            <h2>Couche JDBC</h2>
+            <p>La classe <code>JDBC</code> implémente <code>Passerelle</code> et gère toutes les interactions avec MySQL
+            via des <code>PreparedStatement</code>. La connexion est configurée dans <code>Credentials.java</code> (non versionné).</p>
+
+            <h3>Chargement en 3 phases (getGestionPersonnel)</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 1.5rem 0;">
+                <div style="background:rgba(129,140,248,0.1);border:1px solid var(--primary);border-radius:10px;padding:1rem;text-align:center;">
+                    <div style="font-size:1.4rem;">1️⃣</div>
+                    <div style="color:var(--primary);font-weight:700;margin:0.4rem 0;">Ligues</div>
+                    <code style="font-size:0.82rem;color:#cbd5e1;">SELECT * FROM LIGUE</code>
+                </div>
+                <div style="background:rgba(129,140,248,0.1);border:1px solid var(--primary);border-radius:10px;padding:1rem;text-align:center;">
+                    <div style="font-size:1.4rem;">2️⃣</div>
+                    <div style="color:var(--primary);font-weight:700;margin:0.4rem 0;">Employés</div>
+                    <code style="font-size:0.82rem;color:#cbd5e1;">WHERE id_ligue = ?</code>
+                </div>
+                <div style="background:rgba(129,140,248,0.1);border:1px solid var(--primary);border-radius:10px;padding:1rem;text-align:center;">
+                    <div style="font-size:1.4rem;">3️⃣</div>
+                    <div style="color:var(--primary);font-weight:700;margin:0.4rem 0;">Root</div>
+                    <code style="font-size:0.82rem;color:#cbd5e1;">WHERE id_ligue IS NULL</code>
+                </div>
+            </div>
+
+            <details>
+                <summary>💻 Voir le code — insert(Employe)</summary>
+                <div class="details-content">
+                    <p class="code-title">JDBC.java — insert(Employe)</p>
+                    <div class="code-block"><pre><span class="kw">public int</span> <span class="nm">insert</span>(<span class="cl">Employe</span> employe) <span class="kw">throws</span> <span class="cl">SauvegardeImpossible</span> {
+    <span class="cl">PreparedStatement</span> ps = connection.prepareStatement(
+        <span class="st">"INSERT INTO EMPLOYE (nom_employe, prenom_employe, mail_employe,"</span>
+      + <span class="st">" password_employe, date_arrivee_employe, date_départ_employe,"</span>
+      + <span class="st">" id_ligue, rôle_employe) VALUES(?,?,?,?,?,?,?,?)"</span>,
+        <span class="cl">Statement</span>.RETURN_GENERATED_KEYS);
+
+    ps.setString(<span class="nm">1</span>, employe.getNom());
+    ps.setString(<span class="nm">2</span>, employe.getPrenom());
+    ps.setObject(<span class="nm">5</span>, employe.getDateArrivee());
+    ps.setString(<span class="nm">6</span>, employe.getDateDepart() != <span class="kw">null</span>
+        ? employe.getDateDepart().toString() : <span class="kw">null</span>);
+
+    <span class="kw">if</span> (employe.getLigue() != <span class="kw">null</span>)
+        ps.setInt(<span class="nm">7</span>, employe.getLigue().getId());
+    <span class="kw">else</span>
+        ps.setNull(<span class="nm">7</span>, java.sql.Types.INTEGER); <span class="cm">// root = pas de ligue</span>
+
+    ps.setString(<span class="nm">8</span>, employe.estAdmin(employe.getLigue()) ? <span class="st">"admin"</span> : <span class="st">"employe"</span>);
+    ps.executeUpdate();
+    <span class="cl">ResultSet</span> id = ps.getGeneratedKeys();
+    id.next();
+    <span class="kw">return</span> id.getInt(<span class="nm">1</span>); <span class="cm">// id auto-généré renvoyé à l'objet Java</span>
+}</pre></div>
+                </div>
+            </details>
+
+            <details>
+                <summary>✏️ Voir le code — update(Employe)</summary>
+                <div class="details-content">
+                    <p class="code-title">JDBC.java — update(Employe)</p>
+                    <div class="code-block"><pre><span class="kw">public int</span> <span class="nm">update</span>(<span class="cl">Employe</span> employe) <span class="kw">throws</span> <span class="cl">SauvegardeImpossible</span> {
+    <span class="cl">PreparedStatement</span> ps = connection.prepareStatement(
+        <span class="st">"UPDATE EMPLOYE SET nom_employe=?, prenom_employe=?, mail_employe=?,"</span>
+      + <span class="st">" password_employe=?, date_arrivee_employe=?, date_départ_employe=?,"</span>
+      + <span class="st">" id_ligue=?, rôle_employe=? WHERE id_employe=?"</span>);
+
+    ps.setObject(<span class="nm">5</span>, employe.getDateArrivee());
+    ps.setString(<span class="nm">6</span>, employe.getDateDepart() != <span class="kw">null</span>
+        ? employe.getDateDepart().toString() : <span class="kw">null</span>);
+
+    <span class="cm">// Rôle recalculé à chaque update (gère le changement d'admin)</span>
+    ps.setString(<span class="nm">8</span>, (employe.getLigue() != <span class="kw">null</span>
+        &amp;&amp; employe.estAdmin(employe.getLigue())) ? <span class="st">"admin"</span> : <span class="st">"employe"</span>);
+    ps.setInt(<span class="nm">9</span>, employe.getId());
+    <span class="kw">return</span> ps.executeUpdate();
+}</pre></div>
+                </div>
+            </details>
+        </div>
+
+        <!-- TESTS -->
+        <div class="doc-section" id="tests">
+            <h2>Tests unitaires JUnit 5</h2>
+            <p>Deux classes de test couvrent les entités métier avec des cas nominaux et des cas d'erreur.</p>
+
+            <div class="test-grid">
+                <div class="test-card">
+                    <h4>testLigue.java</h4>
+                    <div class="test-item"><span class="dot">✔</span><span>Création d'une ligue avec le bon nom</span></div>
+                    <div class="test-item"><span class="dot">✔</span><span>Ajout d'un employé dans la liste triée</span></div>
+                    <div class="test-item"><span class="dot">✔</span><span><code>DateInvalide</code> si date arrivée future</span></div>
+                    <div class="test-item"><span class="dot">✔</span><span><code>DateInvalide</code> si départ avant arrivée</span></div>
+                    <div class="test-item"><span class="dot">✔</span><span>Renommage de ligue (get/set)</span></div>
+                    <div class="test-item"><span class="dot">✔</span><span>Changement et lecture de l'administrateur</span></div>
+                    <div class="test-item"><span class="dot">✔</span><span>Suppression d'une ligue</span></div>
+                    <div class="test-item"><span class="dot">✔</span><span>Suppression de l'admin → absent de la liste</span></div>
+                </div>
+                <div class="test-card">
+                    <h4>testEmploye.java</h4>
+                    <div class="test-item"><span class="dot">✔</span><span>Getter / setter nom</span></div>
+                    <div class="test-item"><span class="dot">✔</span><span>Getter / setter prénom</span></div>
+                    <div class="test-item"><span class="dot">✔</span><span>Getter / setter mail</span></div>
+                    <div class="test-item"><span class="dot">✔</span><span><code>checkPassword()</code> après <code>setPassword()</code></span></div>
+                    <div class="test-item"><span class="dot">✔</span><span><code>getLigue()</code> retourne la bonne ligue</span></div>
+                    <div class="test-item"><span class="dot">✔</span><span>Getter / setter date d'arrivée</span></div>
+                    <div class="test-item"><span class="dot">✔</span><span>Getter / setter date de départ</span></div>
+                    <div class="test-item"><span class="dot">✔</span><span>Suppression d'un employé</span></div>
+                </div>
+            </div>
+
+            <details style="margin-top: 1.5rem;">
+                <summary>💻 Voir un exemple — ExceptionDateInvalideDA</summary>
+                <div class="details-content">
+                    <p class="code-title">testLigue.java</p>
+                    <div class="code-block"><pre><span class="an">@Test</span>
+<span class="kw">void</span> <span class="nm">ExceptionDateInvalideDA</span>() <span class="kw">throws</span> <span class="cl">SauvegardeImpossible</span>, <span class="cl">DateInvalide</span> {
+    <span class="cl">Ligue</span> ligue = gestionPersonnel.addLigue(<span class="st">"Fléchettes"</span>);
+    <span class="cl">LocalDate</span> dateArrivee = <span class="cl">LocalDate</span>.now().plusDays(<span class="nm">1</span>); <span class="cm">// date future</span>
+
+    assertThrows(<span class="cl">DateInvalide</span>.<span class="kw">class</span>, () -> {
+        ligue.addEmploye(<span class="st">"Laporte"</span>, <span class="st">"Jean"</span>, <span class="st">"<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6d0743010c1d021f19082d0a000c0401430e0200">[email&#160;protected]</a>"</span>, <span class="st">"pass"</span>,
+                         dateArrivee, <span class="kw">null</span>); <span class="cm">// doit lever DateInvalide</span>
+    });
+}</pre></div>
+                </div>
+            </details>
+        </div>
+
+        <!-- BILAN -->
+        <div class="doc-section" style="border-left-color: var(--primary);">
+            <h2>Bilan Technique</h2>
+            <p>Ce projet m'a permis de maîtriser la chaîne complète d'un applicatif Java desktop :</p>
+            <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                <li><strong>POO avancée :</strong> héritage, interfaces, exceptions métier, pattern Singleton et Passerelle.</li>
+                <li><strong>JDBC :</strong> <code>PreparedStatement</code>, gestion des clés auto-générées, requêtes paramétrées.</li>
+                <li><strong>Architecture :</strong> découplage fort entre couche métier et persistance via l'interface <code>Passerelle</code>.</li>
+                <li><strong>Tests :</strong> JUnit 5, cas nominaux et cas d'erreur avec <code>assertThrows</code>.</li>
+            </ul>
+            <div class="alert-box">
+                <strong>⚠️ Points d'amélioration identifiés :</strong> Les mots de passe sont stockés en clair —
+                l'utilisation de <strong>BCrypt</strong> serait nécessaire en production.
+                La suppression d'une ligue ne cascade pas encore en BDD (<code>ON DELETE CASCADE</code> à ajouter).
+            </div>
+            <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(129, 140, 248, 0.2);">
+                <p style="color:#cbd5e1; margin-bottom: 1rem;">Retrouvez la documentation complète au format PDF :</p>
+                <a href="Doc/Doc_Projet_Java.pdf" class="btn btn-pdf">📄 Télécharger la Documentation Technique complète</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer id="contact">
+        <h2>Me Contacter</h2>
+        <div class="contact-links">
+            <a href="/cdn-cgi/l/email-protection#a6cbc9d3c7cac0cf88cbcfcacec7c8c3e6c1cbc7cfca88c5c9cb">📧 <span class="__cf_email__" data-cfemail="d0bdbfa5b1bcb6b9febdb9bcb8b1beb590b7bdb1b9bcfeb3bfbd">[email&#160;protected]</span></a>
+            <a href="https://www.linkedin.com/in/milhane-undefined-9a610739a/" target="_blank">💼 LinkedIn</a>
+            <a href="https://github.com/Loyd74" target="_blank">💻 GitHub</a>
+        </div>
+        <p style="opacity: 0.6; margin-top: 2rem;">© 2025 - Milhane Moualfi - BTS SIO Charles de Foucauld</p>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>

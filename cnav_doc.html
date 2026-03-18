@@ -5,120 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Documentation Stage CNAV - Milhane Moualfi</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .doc-header {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            padding: 8rem 5% 4rem 5%;
-            text-align: center;
-            border-bottom: 1px solid rgba(129, 140, 248, 0.2);
-        }
-        .doc-header h1 { font-size: 3rem; margin-bottom: 1rem; color: var(--primary); }
-        .doc-header p { font-size: 1.2rem; color: #cbd5e1; max-width: 800px; margin: 0 auto; }
-        
-        .doc-content { max-width: 1200px; margin: 0 auto; padding: 4rem 5%; }
-        
-        .doc-section {
-            background: rgba(30, 41, 59, 0.4);
-            border: 1px solid rgba(129, 140, 248, 0.3);
-            border-radius: 20px;
-            padding: 3rem;
-            margin-bottom: 3rem;
-            border-left: 5px solid var(--accent);
-        }
-        
-        .doc-section h2 { color: var(--accent); font-size: 2rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(129, 140, 248, 0.2); padding-bottom: 1rem; }
-        .doc-section h3 { color: var(--primary); font-size: 1.4rem; margin: 2rem 0 1rem 0; }
-        .doc-section p, .doc-section li { color: #cbd5e1; line-height: 1.8; font-size: 1.05rem; }
-        
-        /* Style pour les images dans la doc */
-        .doc-image {
-            width: 100%;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin: 1.5rem 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            transition: transform 0.3s, border-color 0.3s;
-            cursor: zoom-in; /* Curseur loupe */
-        }
-        .doc-image:hover { 
-            transform: scale(1.02); 
-            border-color: var(--primary);
-        }
-        
-        /* Style pour les blocs de code/détails */
-        details {
-            background: rgba(15, 23, 42, 0.6);
-            border-radius: 8px;
-            margin-top: 1rem;
-            overflow: hidden;
-            border: 1px solid rgba(129, 140, 248, 0.1);
-        }
-        summary {
-            padding: 1rem;
-            cursor: pointer;
-            font-weight: bold;
-            color: white;
-            background: rgba(129, 140, 248, 0.1);
-            transition: background 0.3s;
-            list-style: none;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        summary::after { content: '+'; font-size: 1.2rem; margin-left: 10px; }
-        details[open] summary::after { content: '-'; }
-        summary:hover { background: rgba(129, 140, 248, 0.3); }
-        .details-content { padding: 1.5rem; background: #0b1120; }
-
-        .tag-list { display: flex; gap: 0.5rem; margin-top: 1rem; justify-content: center; }
-        .tech-tag { background: rgba(129, 140, 248, 0.15); color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; border: 1px solid var(--primary); }
-        
-        .code-title { color: #64748b; font-size: 0.9rem; margin-bottom: 5px; font-family: monospace; }
-
-        /* --- STYLES DU MODAL IMAGE (LIGHTBOX) --- */
-        .img-modal {
-            display: none; 
-            position: fixed; 
-            z-index: 9999; 
-            left: 0; 
-            top: 0;
-            width: 100%; 
-            height: 100%; 
-            background-color: rgba(0,0,0,0.9); /* Fond noir très opaque */
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-        .img-modal-content {
-            margin: auto;
-            display: block;
-            max-width: 90%;
-            max-height: 90vh;
-            border-radius: 5px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            animation: zoom 0.3s;
-        }
-        .close-img {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-        .close-img:hover,
-        .close-img:focus {
-            color: var(--primary);
-            text-decoration: none;
-            cursor: pointer;
-        }
-        @keyframes zoom {
-            from {transform:scale(0.8); opacity: 0;}
-            to {transform:scale(1); opacity: 1;}
-        }
-    </style>
 </head>
 <body>
 
@@ -144,7 +30,7 @@
     </div>
 
     <div class="doc-content">
-        <a href="index.html" class="back-button" style="color: var(--primary); text-decoration: none; font-weight: bold; display: inline-block; margin-bottom: 2rem;">← Retour au portfolio</a>
+        <a href="index.html" class="back-button">← Retour au portfolio</a>
 
         <div class="doc-section" id="intro">
             <h2>Contexte du Stage</h2>
@@ -162,7 +48,7 @@
                 La première étape a consisté à comprendre et modifier la structure des données via <strong>Entity Framework Core</strong> (Code First).
             </p>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div class="doc-grid-2">
                 <div>
                     <h3>Structure BDD (SQL Server)</h3>
                     <p>Voici la table <code>Films</code> générée après la migration.</p>
@@ -191,7 +77,7 @@
             </p>
 
             <h3>1. La Logique Métier (Services)</h3>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="doc-grid-2-sm">
                 <img src="images/IFilmServices.png" alt="Interface Services" class="doc-image" onclick="openImage(this)">
                 <img src="images/FilmSevices.png" alt="Implémentation Services" class="doc-image" onclick="openImage(this)">
             </div>
@@ -205,7 +91,7 @@
             <details>
                 <summary>👁️ Vue Index (Liste des Films)</summary>
                 <div class="details-content">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="doc-grid-2-sm">
                         <div>
                             <p class="code-title">Code : Views/Films/Index.cshtml</p>
                             <img src="images/Vue-Index-film.png" alt="Code Vue Index" class="doc-image" onclick="openImage(this)">
@@ -222,7 +108,7 @@
                 <summary>➕ Vue Create (Formulaire d'ajout)</summary>
                 <div class="details-content">
                     <p>Intégration des listes déroulantes pour les Genres et Réalisateurs.</p>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="doc-grid-2-sm">
                         <img src="images/Vue-Create-film.png" alt="Code Vue Create" class="doc-image" onclick="openImage(this)">
                         <img src="images/Create-film.png" alt="Rendu Create" class="doc-image" onclick="openImage(this)">
                     </div>
@@ -240,7 +126,7 @@
             <details>
                 <summary>🔍 Vue Details (Affichage complet)</summary>
                 <div class="details-content">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="doc-grid-2-sm">
                         <img src="images/Vue-Details-film.png" alt="Code Vue Details" class="doc-image" onclick="openImage(this)">
                         <img src="images/Detail-films.png" alt="Rendu Details" class="doc-image" onclick="openImage(this)">
                     </div>
@@ -251,7 +137,7 @@
                 <summary>🗑️ Vue Delete (Suppression)</summary>
                 <div class="details-content">
                     <p>Message d'avertissement avant suppression définitive.</p>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="doc-grid-2-sm">
                         <img src="images/Vue-Delete-film.png" alt="Code Vue Delete" class="doc-image" onclick="openImage(this)">
                         <img src="images/Del-film.png" alt="Rendu Delete" class="doc-image" onclick="openImage(this)">
                     </div>
@@ -265,7 +151,7 @@
                 La partie la plus complexe a été de gérer la table de jointure pour les Séances, liant un Film, un Cinéma et un Horaire.
             </p>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="doc-grid-2-sm">
                 <div>
                     <p><strong>Liste des Séances :</strong></p>
                     <img src="images/Seances.png" alt="Liste séances" class="doc-image" onclick="openImage(this)">
@@ -277,10 +163,10 @@
             </div>
             
             <p style="margin-top: 1rem;"><strong>Suppression sécurisée :</strong></p>
-            <img src="images/Del-seances.png" alt="Suppression Séance" class="doc-image" style="max-width: 80%; display: block; margin: 0 auto;" onclick="openImage(this)">
+            <img src="images/Del-seances.png" alt="Suppression Séance" class="doc-image" class="img-center" onclick="openImage(this)">
         </div>
 
-        <div class="doc-section" style="border-left-color: var(--primary);">
+        <div class="doc-section doc-section--primary">
             <h2>Bilan Technique E5</h2>
             <p>Ce projet m'a permis de maîtriser la chaîne complète du développement .NET :</p>
             <ul>
@@ -296,7 +182,7 @@
     <footer id="contact">
         <h2>Me Contacter</h2>
         <div class="contact-links">
-            <a href="mailto:moualfi.milhane@gmail.com">📧 moualfi.milhane@gmail.com</a>
+            <a href="/cdn-cgi/l/email-protection#771a1802161b111e591a1e1b1f16191237101a161e1b5914181a">📧 <span class="__cf_email__" data-cfemail="7a17150f1b161c1354171316121b141f3a1d171b131654191517">[email&#160;protected]</span></a>
             <a href="https://www.linkedin.com/in/milhane-undefined-9a610739a/" target="_blank">💼 LinkedIn</a>
             <a href="https://github.com/Loyd74" target="_blank">💻 GitHub</a>
         </div>
@@ -308,7 +194,7 @@
         <img class="img-modal-content" id="imgExpanded">
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Navbar Scroll Effect
         window.addEventListener('scroll', () => {
             document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
