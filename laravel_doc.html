@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation ParkLigue - Milhane Moualfi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav id="navbar">
+        <ul>
+            <li><a href="index.html">← Retour au Portfolio</a></li>
+            <li><a href="#intro">Présentation</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#fonctionnalites">Fonctionnalités</a></li>
+            <li><a href="#bdd">Base de Données</a></li>
+            <li><a href="#bilan">Bilan</a></li>
+        </ul>
+    </nav>
+
+    <div class="doc-header">
+        <h1>ParkLigue — Réservation de Parking</h1>
+        <p>Application web Laravel pour la gestion des places de parking de la Maison des Ligues (M2L).</p>
+        <div class="tag-list">
+            <span class="tech-tag">PHP 8.3</span>
+            <span class="tech-tag">Laravel 11</span>
+            <span class="tech-tag">MySQL 8</span>
+            <span class="tech-tag">Eloquent ORM</span>
+            <span class="tech-tag">Bootstrap 5</span>
+            <span class="tech-tag">Vite</span>
+        </div>
+    </div>
+
+    <div class="doc-content">
+        <a href="index.html" class="back-button">← Retour au portfolio</a>
+
+        <!-- ====== PRÉSENTATION ====== -->
+        <div class="doc-section" id="intro">
+            <h2>Présentation du Projet</h2>
+
+            <div class="doc-grid-2">
+                <div>
+                    <h3>🏢 Contexte</h3>
+                    <p>
+                        <strong>ParkLigue</strong> est une application web développée dans le cadre du BTS SIO SLAM,
+                        pour la <strong>Maison des Ligues (M2L)</strong>. Le projet répond à un problème concret :
+                        éliminer le stationnement sauvage dans les parkings de l'organisation en permettant à
+                        chaque membre du personnel de réserver une place numérotée.
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        Réalisation en équipe du <strong>09/03/2026 au 02/04/2026</strong> au Campus Charles de Foucauld, Paris.
+                    </p>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="https://github.com/Rivalzina75/projet_parking" target="_blank" class="btn btn-pdf">💻 Voir le code source GitHub</a>
+                    </div>
+                </div>
+                <div>
+                    <h3>🎯 Objectifs</h3>
+                    <ul style="margin-left: 1.5rem; color: #cbd5e1; line-height: 2;">
+                        <li>Permettre à chaque agent de réserver une place libre</li>
+                        <li>Gérer automatiquement une file d'attente en cas de saturation</li>
+                        <li>Offrir un espace administrateur complet</li>
+                        <li>Automatiser l'expiration des réservations</li>
+                    </ul>
+                    <div style="margin-top: 1.5rem;">
+                        <h3>🛠️ Environnement Technique</h3>
+                        <div class="tag-list" style="margin-top: 0.8rem;">
+                            <span class="tech-tag">Visual Studio Code</span>
+                            <span class="tech-tag">Composer</span>
+                            <span class="tech-tag">Git / GitHub</span>
+                            <span class="tech-tag">Vite</span>
+                            <span class="tech-tag">Tailwind CSS v4</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== ARCHITECTURE MVC ====== -->
+        <div class="doc-section" id="architecture">
+            <h2>Architecture MVC Laravel</h2>
+            <p>
+                Le projet suit le patron <strong>Model-View-Controller</strong> de Laravel, avec une séparation claire
+                entre la logique métier, les données et les vues Blade.
+            </p>
+
+            <div style="margin-top: 2rem;">
+                <div class="arch-flow">
+                    <div class="arch-box">🌐 Requête HTTP<span>Navigateur</span></div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-box">🛣️ Router<span>routes/web.php</span></div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-box">⚙️ Controller<span>app/Http/Controllers</span></div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-box">📦 Model<span>Eloquent ORM</span></div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-box">🗄️ MySQL<span>Base de données</span></div>
+                </div>
+                <div class="arch-flow" style="margin-top: 1rem;">
+                    <div class="arch-box">📄 Vue Blade<span>resources/views</span></div>
+                    <div class="arch-arrow">←</div>
+                    <div class="arch-box">⚙️ Controller<span>Retourne la vue</span></div>
+                </div>
+            </div>
+
+            <div class="doc-grid-2" style="margin-top: 2rem;">
+                <div>
+                    <h3>📁 Structure du projet</h3>
+                    <div class="code-block">
+                        <pre><span class="cm">projet_parking/</span>
+├── <span class="kw">app/</span>
+│   ├── <span class="cl">Http/Controllers/</span>
+│   │   ├── ReservationController.php
+│   │   ├── AdminController.php
+│   │   └── Auth/
+│   └── <span class="cl">Models/</span>
+│       ├── User.php
+│       ├── Place.php
+│       ├── Reservation.php
+│       └── PlaceListeAttente.php
+├── <span class="kw">database/migrations/</span>
+├── <span class="kw">resources/views/</span>
+│   ├── dashboard.blade.php
+│   ├── admin/
+│   └── auth/
+└── <span class="kw">routes/web.php</span></pre>
+                    </div>
+                </div>
+                <div>
+                    <h3>🔒 Authentification</h3>
+                    <p>Utilisation du système d'authentification intégré de Laravel avec une couche de <strong>validation administrative</strong> : chaque nouveau compte doit être approuvé par l'administrateur avant de pouvoir accéder à l'application.</p>
+                    <div style="margin-top: 1rem;" class="alert-box">
+                        <strong>⚠️ Sécurité :</strong> Un middleware vérifie que le compte est validé à chaque requête. Les comptes non approuvés sont redirigés vers une page d'attente.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== FONCTIONNALITÉS ====== -->
+        <div class="doc-section" id="fonctionnalites">
+            <h2>Fonctionnalités Développées</h2>
+
+            <!-- Dashboard utilisateur -->
+            <details open>
+                <summary>🖥️ Tableau de Bord Utilisateur</summary>
+                <div class="details-content">
+                    <p>Le dashboard est le cœur de l'application pour l'agent. Il affiche en temps réel l'état de sa réservation.</p>
+                    <div class="doc-grid-2" style="margin-top: 1.5rem;">
+                        <div>
+                            <h3>📋 États possibles</h3>
+                            <ul style="margin-left: 1.5rem; color: #cbd5e1; line-height: 2;">
+                                <li><strong>Aucune réservation :</strong> bouton "Réserver une place"</li>
+                                <li><strong>Place attribuée :</strong> affichage du numéro + date d'expiration + bouton de clôture</li>
+                                <li><strong>En file d'attente :</strong> affichage du rang dans la file</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>📜 Historique</h3>
+                            <p>Chaque utilisateur dispose d'un historique complet de ses réservations passées avec les dates de début et de fin.</p>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <!-- Attribution des places -->
+            <details>
+                <summary>🎲 Attribution Aléatoire des Places</summary>
+                <div class="details-content">
+                    <div class="doc-grid-2">
+                        <div>
+                            <h3>⚙️ Logique métier</h3>
+                            <p>Lorsqu'un utilisateur fait une demande, le système :</p>
+                            <ol style="margin-left: 1.5rem; color: #cbd5e1; line-height: 2;">
+                                <li>Recherche toutes les places avec statut <code>actif</code> et non réservées</li>
+                                <li>En sélectionne une <strong>aléatoirement</strong> via <code>inRandomOrder()->first()</code></li>
+                                <li>Crée une nouvelle <code>Reservation</code> liée à l'utilisateur et la place</li>
+                                <li>Calcule la date d'expiration selon le paramètre admin</li>
+                            </ol>
+                        </div>
+                        <div>
+                            <h3>📝 Extrait logique</h3>
+                            <div class="code-block">
+                                <pre><span class="cm">// Cherche une place libre</span>
+<span class="kw">$place</span> = Place::where(<span class="st">'statut'</span>, <span class="st">'actif'</span>)
+    ->whereDoesntHave(<span class="st">'reservations'</span>, <span class="kw">function</span>(<span class="kw">$q</span>) {
+        <span class="kw">$q</span>->whereNull(<span class="st">'date_fin'</span>);
+    })
+    ->inRandomOrder()
+    ->first();
+
+<span class="kw">if</span> (!<span class="kw">$place</span>) {
+    <span class="cm">// → Mise en file d'attente</span>
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <!-- File d'attente -->
+            <details>
+                <summary>⏳ Gestion Automatique de la File d'Attente</summary>
+                <div class="details-content">
+                    <p>
+                        Si aucune place n'est disponible, l'utilisateur est automatiquement placé en file d'attente.
+                        Son rang est calculé en fonction de la date de sa demande.
+                    </p>
+                    <div class="doc-grid-2" style="margin-top: 1.5rem;">
+                        <div>
+                            <h3>🔄 Promotion automatique</h3>
+                            <p>À chaque libération de place (expiration ou clôture manuelle), le système :</p>
+                            <ol style="margin-left: 1.5rem; color: #cbd5e1; line-height: 2;">
+                                <li>Recherche le premier utilisateur en attente (par <code>date_demande</code>)</li>
+                                <li>Lui attribue automatiquement la place libérée</li>
+                                <li>Le retire de la table <code>place_liste_attentes</code></li>
+                                <li>Crée une nouvelle réservation en son nom</li>
+                            </ol>
+                        </div>
+                        <div>
+                            <h3>⏰ Expiration automatique</h3>
+                            <p>La durée de réservation est un <strong>paramètre configurable</strong> par l'administrateur (en heures). À l'expiration, la réservation est marquée comme terminée et la file d'attente est consultée.</p>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <!-- Espace admin -->
+            <details>
+                <summary>👑 Espace Administrateur</summary>
+                <div class="details-content">
+                    <p>L'administrateur dispose d'un panneau dédié avec accès complet à toutes les entités.</p>
+                    <div class="doc-grid-2" style="margin-top: 1.5rem;">
+                        <div>
+                            <h3>🗂️ Gestion des entités</h3>
+                            <ul style="margin-left: 1.5rem; color: #cbd5e1; line-height: 2;">
+                                <li><strong>Utilisateurs :</strong> validation des comptes, liste, suppression</li>
+                                <li><strong>Places :</strong> ajout, activation/désactivation, suppression</li>
+                                <li><strong>Réservations :</strong> visualisation globale, clôture manuelle</li>
+                                <li><strong>File d'attente :</strong> visualisation et gestion</li>
+                                <li><strong>Historique :</strong> consultation de toutes les réservations passées</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>⚙️ Paramètre de durée</h3>
+                            <p>L'administrateur peut modifier à tout moment la <strong>durée maximale d'une réservation</strong>. Ce paramètre est stocké en base et appliqué à toutes les nouvelles réservations créées après modification.</p>
+                        </div>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- ====== BASE DE DONNÉES ====== -->
+        <div class="doc-section" id="bdd">
+            <h2>Modèle de Données (MCD)</h2>
+            <p>
+                Le schéma comprend quatre entités principales reliées par des associations.
+                Les migrations Laravel (Eloquent Code First) ont été utilisées pour générer la base MySQL.
+            </p>
+
+            <div class="db-schema" style="margin-top: 2rem;">
+                <div class="db-table-card">
+                    <div class="db-table-header">👤 UTILISATEUR (users)</div>
+                    <div class="db-field"><span class="fname">id</span><span class="ftype">BIGINT</span><span class="fkey">PK</span></div>
+                    <div class="db-field"><span class="fname">name</span><span class="ftype">VARCHAR</span></div>
+                    <div class="db-field"><span class="fname">email</span><span class="ftype">VARCHAR UNIQUE</span></div>
+                    <div class="db-field"><span class="fname">password</span><span class="ftype">VARCHAR (hashed)</span></div>
+                    <div class="db-field"><span class="fname">role</span><span class="ftype">ENUM</span></div>
+                    <div class="db-field"><span class="fname">is_validated</span><span class="ftype">BOOLEAN</span></div>
+                    <div class="db-field"><span class="fname">created_at</span><span class="ftype">TIMESTAMP</span></div>
+                </div>
+
+                <div class="db-table-card">
+                    <div class="db-table-header">🅿️ PLACE (places)</div>
+                    <div class="db-field"><span class="fname">id</span><span class="ftype">BIGINT</span><span class="fkey">PK</span></div>
+                    <div class="db-field"><span class="fname">numero</span><span class="ftype">VARCHAR UNIQUE</span></div>
+                    <div class="db-field"><span class="fname">statut</span><span class="ftype">ENUM actif/inactif</span></div>
+                    <div class="db-field"><span class="fname">created_at</span><span class="ftype">TIMESTAMP</span></div>
+                    <div class="db-relation">↕ Une place peut avoir 0..n réservations</div>
+                </div>
+
+                <div class="db-table-card">
+                    <div class="db-table-header">📋 RESERVATION (reservations)</div>
+                    <div class="db-field"><span class="fname">id</span><span class="ftype">BIGINT</span><span class="fkey">PK</span></div>
+                    <div class="db-field"><span class="fname">user_id</span><span class="ftype">BIGINT</span><span class="fkey">FK → users</span></div>
+                    <div class="db-field"><span class="fname">place_id</span><span class="ftype">BIGINT</span><span class="fkey">FK → places</span></div>
+                    <div class="db-field"><span class="fname">date_debut</span><span class="ftype">TIMESTAMP</span></div>
+                    <div class="db-field"><span class="fname">date_fin</span><span class="ftype">TIMESTAMP NULL</span></div>
+                    <div class="db-relation">Table de jointure UTILISATEUR ↔ PLACE</div>
+                </div>
+
+                <div class="db-table-card">
+                    <div class="db-table-header">⏳ PLACE_LISTE_ATTENTE</div>
+                    <div class="db-field"><span class="fname">id</span><span class="ftype">BIGINT</span><span class="fkey">PK</span></div>
+                    <div class="db-field"><span class="fname">user_id</span><span class="ftype">BIGINT</span><span class="fkey">FK → users</span></div>
+                    <div class="db-field"><span class="fname">date_demande</span><span class="ftype">TIMESTAMP</span></div>
+                    <div class="db-relation">Un utilisateur = 0..1 entrée en file</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h3>🔗 Relations Eloquent</h3>
+                <div class="doc-grid-2">
+                    <div class="code-block">
+                        <p class="code-title">Fichier : app/Models/User.php</p>
+                        <pre><span class="kw">class</span> <span class="cl">User</span> <span class="kw">extends</span> Authenticatable {
+
+  <span class="kw">public function</span> <span class="cl">reservations</span>() {
+    <span class="kw">return</span> <span class="nm">$this</span>->hasMany(<span class="cl">Reservation</span>::<span class="kw">class</span>);
+  }
+
+  <span class="kw">public function</span> <span class="cl">listeAttente</span>() {
+    <span class="kw">return</span> <span class="nm">$this</span>->hasOne(
+      <span class="cl">PlaceListeAttente</span>::<span class="kw">class</span>
+    );
+  }
+}</pre>
+                    </div>
+                    <div class="code-block">
+                        <p class="code-title">Fichier : app/Models/Place.php</p>
+                        <pre><span class="kw">class</span> <span class="cl">Place</span> <span class="kw">extends</span> Model {
+
+  <span class="kw">public function</span> <span class="cl">reservations</span>() {
+    <span class="kw">return</span> <span class="nm">$this</span>->hasMany(<span class="cl">Reservation</span>::<span class="kw">class</span>);
+  }
+
+  <span class="kw">public function</span> <span class="cl">reservationActive</span>() {
+    <span class="kw">return</span> <span class="nm">$this</span>->hasOne(<span class="cl">Reservation</span>::<span class="kw">class</span>)
+      ->whereNull(<span class="st">'date_fin'</span>);
+  }
+}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== BILAN ====== -->
+        <div class="doc-section doc-section--primary" id="bilan">
+            <h2>Bilan Technique E6</h2>
+            <p>Ce projet m'a permis de maîtriser le cycle complet d'une application web Laravel en conditions réelles :</p>
+            <ul style="margin-left: 1.5rem; color: #cbd5e1; line-height: 2; margin-top: 1rem;">
+                <li><strong>Backend :</strong> Laravel 11, PHP 8.3, Eloquent ORM, Migrations, Middleware, Authentification.</li>
+                <li><strong>Logique métier :</strong> Attribution aléatoire, gestion de file d'attente, expiration automatique.</li>
+                <li><strong>Frontend :</strong> Blade, Bootstrap 5, Vite, Tailwind CSS v4.</li>
+                <li><strong>Base de données :</strong> MySQL 8, modélisation relationnelle (MCD/MLD), migrations Code First.</li>
+                <li><strong>Travail en équipe :</strong> Git/GitHub, gestion des branches, code review.</li>
+            </ul>
+
+            <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="https://github.com/Rivalzina75/projet_parking" target="_blank" class="btn btn-pdf">💻 Code Source GitHub</a>
+                <a href="Doc/Fiche de situation 2 professionnelle SLAM Milhane Moualfi.pdf" class="btn btn-pdf">📄 Fiche de Situation</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer id="contact">
+        <h2>Me Contacter</h2>
+        <div class="contact-links">
+            <a href="mailto:milhane.moualfi@example.com">📧 Email</a>
+            <a href="https://www.linkedin.com/in/milhane-undefined-9a610739a/" target="_blank">💼 LinkedIn</a>
+            <a href="https://github.com/Loyd74" target="_blank">💻 GitHub</a>
+        </div>
+        <p style="opacity: 0.6; margin-top: 2rem;">© 2025 - Milhane Moualfi - BTS SIO Charles de Foucauld</p>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
+</body>
+</html>

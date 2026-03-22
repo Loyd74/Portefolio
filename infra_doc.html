@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Stage Infra & Réseaux - Milhane Moualfi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav id="navbar">
+        <ul>
+            <li><a href="index.html">← Retour au Portfolio</a></li>
+            <li><a href="#intro">Contexte</a></li>
+            <li><a href="#competences">Compétences</a></li>
+            <li><a href="#journal">Journal de Bord</a></li>
+            <li><a href="#bilan">Bilan</a></li>
+        </ul>
+    </nav>
+
+    <div class="doc-header">
+        <h1>Stage Infrastructure & Réseaux</h1>
+        <p>Administration système, support technique et gestion du parc informatique.</p>
+        <div class="tag-list">
+            <span class="tech-tag">Windows Server</span>
+            <span class="tech-tag">Active Directory</span>
+            <span class="tech-tag">DHCP/DNS</span>
+            <span class="tech-tag">Réseau</span>
+            <span class="tech-tag">Support N2</span>
+            <span class="tech-tag">GLPI</span>
+        </div>
+    </div>
+
+    <div class="doc-content">
+        <a href="index.html" class="back-button">← Retour au portfolio</a>
+
+        <!-- ====== CONTEXTE ====== -->
+        <div class="doc-section" id="intro">
+            <h2>Contexte du Stage</h2>
+            <p>
+                J'ai effectué mon stage de deuxième année dans le cadre du BTS SIO SLAM au sein d'un service informatique municipal.
+                L'objectif était de monter en compétence sur l'administration de systèmes et de réseaux, la gestion du parc informatique
+                et le support technique aux agents.
+            </p>
+            <p style="margin-top: 1rem;">
+                Les missions couvraient aussi bien les interventions terrain (câblage, installation de matériel, dépannage)
+                que les tâches d'administration (création de comptes, gestion des tickets GLPI, configuration des postes).
+            </p>
+        </div>
+
+        <!-- ====== COMPÉTENCES ====== -->
+        <div class="doc-section" id="competences">
+            <h2>Compétences Mobilisées</h2>
+
+            <div class="doc-grid-2">
+                <div>
+                    <h3>🖧 Réseau & Infrastructure</h3>
+                    <ul style="margin-left: 1.5rem; color: #cbd5e1; line-height: 2;">
+                        <li>Diagnostic de connectivité (câble RJ45, switch)</li>
+                        <li>Identification de pannes réseau (boucle Ethernet, nomenclature PC)</li>
+                        <li>Configuration proxy sur postes clients</li>
+                        <li>Gestion BitLocker (chiffrement disques)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>🛠️ Support & Administration</h3>
+                    <ul style="margin-left: 1.5rem; color: #cbd5e1; line-height: 2;">
+                        <li>Gestion des tickets via GLPI / Rubicat</li>
+                        <li>Création et gestion de comptes agents / stagiaires</li>
+                        <li>Attribution et réattribution de numéros de téléphone</li>
+                        <li>Réinitialisation de mots de passe (sur site et à distance)</li>
+                        <li>Installation complète de postes de travail</li>
+                        <li>Création et administration de machines virtuelles</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h3>📦 Outils & Applications</h3>
+                <div class="tag-list" style="margin-top: 0.8rem;">
+                    <span class="tech-tag">GLPI</span>
+                    <span class="tech-tag">Rubicat</span>
+                    <span class="tech-tag">VMware / Zorin OS</span>
+                    <span class="tech-tag">Technocart</span>
+                    <span class="tech-tag">Maydis</span>
+                    <span class="tech-tag">Astral</span>
+                    <span class="tech-tag">Incovar</span>
+                    <span class="tech-tag">Windows 10</span>
+                    <span class="tech-tag">BitLocker</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== JOURNAL DE BORD ====== -->
+        <div class="doc-section" id="journal">
+            <h2>Journal de Bord</h2>
+            <p style="color: #94a3b8; margin-bottom: 2rem;">
+                Compte-rendu chronologique des activités réalisées au fil du stage.
+            </p>
+
+            <!-- J1 -->
+            <details open>
+                <summary>📅 Jour 1 — Création d'agents & Intervention réseau</summary>
+                <div class="details-content">
+                    <div class="doc-grid-2">
+                        <div>
+                            <h3>🎫 Gestion des tickets (GLPI / Rubicat)</h3>
+                            <p>Création d'un nouvel agent suite à un ticket ouvert sur <strong>GLPI</strong> avec l'outil <strong>Rubicat</strong>.
+                            Attribution et création d'un numéro de téléphone associé au compte.
+                            Réattribution d'un numéro existant vers un nouvel agent.</p>
+                        </div>
+                        <div>
+                            <h3>🔌 Intervention terrain — Gymnase</h3>
+                            <p>Déplacement dans un gymnase suite à un signalement de perte de connectivité.
+                            Diagnostic sur place : un <strong>câble Ethernet RJ45 formait une boucle</strong> dans le réseau,
+                            provoquant une tempête de broadcast. Résolution par suppression de la boucle.</p>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <!-- J2 -->
+            <details>
+                <summary>📅 Jour 2 — Création de compte & Diagnostic PC</summary>
+                <div class="details-content">
+                    <div class="doc-grid-2">
+                        <div>
+                            <h3>👤 Administration des comptes</h3>
+                            <p>Création d'un <strong>compte stagiaire</strong> dans l'annuaire.
+                            Réinitialisation d'un mot de passe pour un agent existant.</p>
+                        </div>
+                        <div>
+                            <h3>🖥️ Dépannage — Absence de connexion réseau</h3>
+                            <p>Intervention sur un PC sans connexion réseau. Tests effectués :
+                            vérification du câble et du switch (OK). La cause réelle était un
+                            <strong>problème de nomenclature du PC</strong> (nom de machine non reconnu
+                            par le réseau). Correction du nom pour rétablir la connexion.</p>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <!-- J3 -->
+            <details>
+                <summary>📅 Jour 3 — VM Zorin & Intervention BitLocker</summary>
+                <div class="details-content">
+                    <div class="doc-grid-2">
+                        <div>
+                            <h3>💻 Machine Virtuelle Zorin OS</h3>
+                            <p>Création et configuration d'une <strong>VM sous Zorin OS</strong>
+                            dans l'environnement de virtualisation du service.</p>
+                        </div>
+                        <div>
+                            <h3>🔒 Intervention — Centre Municipal de Santé Henri Barbusse</h3>
+                            <p>Déplacement au centre de santé pour un problème de <strong>disques durs chiffrés BitLocker</strong>
+                            dont les clés de récupération n'étaient plus accessibles. Décision prise de
+                            <strong>remplacer le PC</strong> concerné pour rétablir l'activité rapidement.</p>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        <h3>📞 Ticket téléphonie</h3>
+                        <p>Traitement d'un ticket d'attribution d'un téléphone à un agent.</p>
+                    </div>
+                </div>
+            </details>
+
+            <!-- J4 -->
+            <details>
+                <summary>📅 Jour 4 — Installation matériel & Découverte applicatif</summary>
+                <div class="details-content">
+                    <div class="doc-grid-2">
+                        <div>
+                            <h3>🖱️ Installation — Bâtiment RH</h3>
+                            <p>Installation d'un <strong>pied d'écran et d'un écran tactile</strong>
+                            dans le bâtiment des Ressources Humaines. Câblage et mise en service du poste.</p>
+                        </div>
+                        <div>
+                            <h3>🗂️ Découverte des Applications Métier</h3>
+                            <p>Présentation par les gestionnaires applicatifs des différentes solutions
+                            logicielles utilisées par la collectivité :</p>
+                            <div class="tag-list" style="margin-top: 0.8rem;">
+                                <span class="tech-tag">Technocart</span>
+                                <span class="tech-tag">Maydis</span>
+                                <span class="tech-tag">Astral</span>
+                                <span class="tech-tag">Incovar</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        <h3>🖥️ Présentation des différentes VMs</h3>
+                        <p>Tour d'horizon de l'ensemble des machines virtuelles administrées par le service informatique.</p>
+                    </div>
+                </div>
+            </details>
+
+            <!-- J5 -->
+            <details>
+                <summary>📅 Jour 5 — Intervention Maison Makeba</summary>
+                <div class="details-content">
+                    <h3>🏠 Déplacement — Maison Makeba</h3>
+                    <p>Intervention sur site à la Maison Makeba. <em>(Détails à compléter)</em></p>
+                </div>
+            </details>
+
+            <!-- J8 -->
+            <details>
+                <summary>📅 Jour 8 — Journée calme</summary>
+                <div class="details-content">
+                    <h3>📋 Activité réduite</h3>
+                    <p>Journée peu chargée en interventions, mise à profit pour la prise en main des outils internes et de la documentation du service.</p>
+                </div>
+            </details>
+
+            <!-- J9 -->
+            <details>
+                <summary>📅 Jour 9 — Installations multiples & Retour Makeba</summary>
+                <div class="details-content">
+                    <div class="doc-grid-2">
+                        <div>
+                            <h3>🖥️ Installation poste d'accueil</h3>
+                            <p>Installation d'un <strong>PC Windows 10</strong> et d'un <strong>bras d'écran</strong>
+                            au poste d'accueil du bâtiment.</p>
+                        </div>
+                        <div>
+                            <h3>🖨️ Installation imprimante</h3>
+                            <p>Installation d'une imprimante accompagnée du PC, écran, souris et clavier.
+                            <strong>Problème :</strong> l'imprimante ne fonctionnait pas en fin d'intervention —
+                            une repasse sera nécessaire pour finaliser la configuration.</p>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        <h3>🌐 Retour PC Maison Makeba — Proxy & Mot de passe</h3>
+                        <p>Retour du PC de la Maison Makeba avec la <strong>configuration proxy mise à jour</strong>.
+                        Problème détecté au démarrage : le mot de passe du compte était incorrect.
+                        <strong>Réinitialisation effectuée à distance</strong> pour rétablir l'accès sans se déplacer.</p>
+                    </div>
+                </div>
+            </details>
+
+            <!-- J10 -->
+            <details>
+                <summary>📅 Jour 10 — Livraison de matériel</summary>
+                <div class="details-content">
+                    <h3>📦 Livraison — Ordinateurs & Souris</h3>
+                    <p>Réception et livraison d'un lot d'<strong>ordinateurs et souris</strong> pour les services de la ville.
+                    Inventaire et préparation du matériel pour déploiement.</p>
+                </div>
+            </details>
+
+        </div>
+
+        <!-- ====== BILAN ====== -->
+        <div class="doc-section doc-section--primary" id="bilan">
+            <h2>Bilan Technique E5</h2>
+            <p>Ce stage m'a permis de découvrir concrètement le métier de technicien système et réseau :</p>
+            <ul style="margin-left: 1.5rem; color: #cbd5e1; line-height: 2; margin-top: 1rem;">
+                <li><strong>Support N1/N2 :</strong> Gestion de tickets, diagnostic et résolution d'incidents.</li>
+                <li><strong>Réseau :</strong> Câblage RJ45, détection de boucle, proxy, connectivité.</li>
+                <li><strong>Systèmes :</strong> Windows 10, Zorin OS VM, BitLocker, Active Directory.</li>
+                <li><strong>Matériel :</strong> Installation complète de postes, imprimantes, écrans tactiles.</li>
+                <li><strong>Outils ITSM :</strong> GLPI, Rubicat pour la gestion du parc et des tickets.</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <footer id="contact">
+        <h2>Me Contacter</h2>
+        <div class="contact-links">
+            <a href="mailto:milhane.moualfi@example.com">📧 Email</a>
+            <a href="https://www.linkedin.com/in/milhane-undefined-9a610739a/" target="_blank">💼 LinkedIn</a>
+            <a href="https://github.com/Loyd74" target="_blank">💻 GitHub</a>
+        </div>
+        <p style="opacity: 0.6; margin-top: 2rem;">© 2025 - Milhane Moualfi - BTS SIO Charles de Foucauld</p>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
+</body>
+</html>
